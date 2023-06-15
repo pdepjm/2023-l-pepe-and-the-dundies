@@ -1,3 +1,54 @@
+% El patio de Pepe (ejercicio visto en clase)
+
+esVenenosa(petunia).
+esVenenosa(rosa).
+esVenenosa(menta).
+
+esVenenosa(arlequin).
+esVenenosa(bromadiolona).
+
+esPlanta(petunia).
+esPlanta(rosa).
+esPlanta(menta).
+esPlanta(girasol).
+
+tieneGradoVeneno(Elemento, 3):-
+    esPlanta(Elemento),
+    esVenenosa(Elemento).
+
+tieneGradoVeneno(arlequin, 40).
+tieneGradoVeneno(bromadiolona, 20).
+tieneGradoVeneno(pepe, 18).
+
+% esPlantaComestible/1: una planta será comestible cuando no sea venenosa. 
+%INVERSIBILIDAD
+
+esPlantaComestible(Elemento):-
+    esPlanta(Elemento),
+    not(esVenenosa(Elemento)).
+
+% esHeavy/1: algo será heavy cuando su nivel de veneno sea mayor a 10 y menor a 30. 
+
+esHeavy(Elemento):-
+    tieneGradoVeneno(Elemento, Cantidad),
+    between(10, 30, Cantidad).
+
+% esIncomible/1 un elemento será incomible cuando su nivel de veneno sea mayor a 30. 
+esIncomible(Elemento):-
+    tieneGradoVeneno(Elemento, Cantidad),
+    Cantidad > 30.
+
+% combinacionIncomible/2: una combinación de 2 elementos es incomible si la suma de sus grados es 21.
+combinacionIncomible(Elemento1, Elemento2):-
+    tieneGradoVeneno(Elemento1, Grado1),
+    tieneGradoVeneno(Elemento2, Grado2),
+    21 is Grado1 + Grado2.
+
+
+
+%----------------------------------------------
+% The dundies - Práctica labo
+
 %consumoDeCafe/2 -> Empleado, Cant
 
 consumoDeCafe(michael, 2).
